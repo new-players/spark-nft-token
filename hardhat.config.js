@@ -6,10 +6,10 @@ require("@nomiclabs/hardhat-solhint");
 require("@nomicfoundation/hardhat-chai-matchers");
 
 const COMPILER_SETTINGS = {
-  optimizer: {
-    enabled: true,
-    runs: 200,
-  },
+    optimizer: {
+        enabled: true,
+        runs: 200,
+    },
 };
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
@@ -21,58 +21,58 @@ const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL;
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY;
 
 const MUMBAI_DEPLOYMENT_SETTINGS = {
-  url: MUMBAI_RPC_URL,
-  accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
-  chainId: 80001,
+    url: MUMBAI_RPC_URL,
+    accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+    chainId: 80001,
 };
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: {
-    compilers: [
-      {
-        version: "0.8.20",
-        settings: COMPILER_SETTINGS,
-      },
-    ],
-  },
-  networks: {
-    hardhat: {
-      chainId: 31337,
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.20",
+                settings: COMPILER_SETTINGS,
+            },
+        ],
     },
-    localhost: {
-      chainId: 31337,
+    networks: {
+        hardhat: {
+            chainId: 31337,
+        },
+        localhost: {
+            chainId: 31337,
+        },
+        mumbai: MUMBAI_DEPLOYMENT_SETTINGS,
     },
-    mumbai: MUMBAI_DEPLOYMENT_SETTINGS,
-  },
-  defaultNetwork: "hardhat",
-  etherscan: {
-    apiKey: {
-      polygonMumbai: POLYGONSCAN_API_KEY,
+    defaultNetwork: "hardhat",
+    etherscan: {
+        apiKey: {
+            polygonMumbai: POLYGONSCAN_API_KEY,
+        },
     },
-  },
-  gasReporter: {
-    enabled: REPORT_GAS,
-    currency: "USD",
-    outputFile: "gas-report.txt",
-    noColors: true,
-  },
-  contractSizer: {
-    runOnCompile: false,
-  },
-  paths: {
-    sources: "./contracts",
-    tests: "./test",
-    cache: "./build/cache",
-    artifacts: "./build/artifacts",
-  },
-  namedAccounts: {
-    deployer: {
-      default: 0,
-      80001: 0,
+    gasReporter: {
+        enabled: REPORT_GAS,
+        currency: "USD",
+        outputFile: "gas-report.txt",
+        noColors: true,
     },
-  },
-  mocha: {
-    timeout: 300000, // 300 seconds max for running tests
-  },
+    contractSizer: {
+        runOnCompile: false,
+    },
+    paths: {
+        sources: "./contracts",
+        tests: "./test",
+        cache: "./build/cache",
+        artifacts: "./build/artifacts",
+    },
+    namedAccounts: {
+        deployer: {
+            default: 0,
+            80001: 0,
+        },
+    },
+    mocha: {
+        timeout: 300000, // 300 seconds max for running tests
+    },
 };

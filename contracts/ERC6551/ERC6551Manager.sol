@@ -24,6 +24,16 @@ contract ERC6551Manager is AccessControl {
     // ERC721 interface id to check the ERC721 compatibility
     bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;
 
+    event ERC6551RegistryUpdated(
+        address oldRegistryAddress,
+        address newRegistryAddress
+    );
+    event ERC6551SaltUpdated(bytes32 oldSalt, bytes32 newSalt);
+    event ERC6551ImplementationUpdated(
+        address oldImplementationAddress,
+        address newImplementationAddress
+    );
+
     constructor(
         address _registryAddress,
         address _implementationAddress,
@@ -49,7 +59,11 @@ contract ERC6551Manager is AccessControl {
         address _registryAddress
     ) external onlyRole(MANAGER_ROLE) {
         Validator.checkForZeroAddress(_registryAddress);
+
+        address oldRegistryAddress = erc6551RegistryAddress;
         erc6551RegistryAddress = _registryAddress;
+
+        emit ERC6551RegistryUpdated(oldRegistryAddress, erc6551RegistryAddress);
     }
 
     /// @notice Configure the ERC 6551 implementation contract address for TBA
@@ -58,14 +72,25 @@ contract ERC6551Manager is AccessControl {
         address _implementationAddress
     ) external onlyRole(MANAGER_ROLE) {
         Validator.checkForZeroAddress(_implementationAddress);
+
+        address oldImplementationAddress = erc6551ImplementationAddress;
         erc6551ImplementationAddress = _implementationAddress;
+
+        emit ERC6551ImplementationUpdated(
+            oldImplementationAddress,
+            erc6551ImplementationAddress
+        );
     }
 
     /// @notice Configure the salt for the creation and lookup of token bound account
     /// @param _salt ERC 6551 salt value (zero is officially used)
     function setupERC6551Salt(bytes32 _salt) external onlyRole(MANAGER_ROLE) {
         Validator.checkForZeroBytes32(_salt);
+
+        bytes32 oldSalt = erc6551Salt;
         erc6551Salt = _salt;
+
+        emit ERC6551SaltUpdated(oldSalt, erc6551Salt);
     }
 
     /// @notice Determine or retrieve the NFT's token bound account address
@@ -119,7 +144,7 @@ contract ERC6551Manager is AccessControl {
             _getChainId(),
             _nftContractAddress,
             _tokenId
-        );        
+        );
     }
 
     /// @notice Retrieve the chain id of the network where the contract is deployed

@@ -1,14 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.20;
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/access/extensions/AccessControlEnumerable.sol";
 import "../Helpers/Validator.sol";
 import "../Interfaces/IERC6551Registry.sol";
 
 /// @title ERC6551Manager contract
 /// @author Venkatesh
 /// @notice This contract is used to manage the ERC6551 funtionalities
-contract ERC6551Manager is AccessControl {
+/// @custom:security-contact rvenki666@gmail.com
+contract ERC6551Manager is AccessControlEnumerable {
+    // ERC721 interface id to check the ERC721 compatibility
+    bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;
+
     // Access control roles
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 
@@ -21,19 +25,26 @@ contract ERC6551Manager is AccessControl {
     // check the registry contracts from here => https://docs.tokenbound.org/contracts/deployments
     address public erc6551RegistryAddress;
 
-    // ERC721 interface id to check the ERC721 compatibility
-    bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;
-
+    /// @notice Event emitted when the ERC6551 registry is updated
     event ERC6551RegistryUpdated(
         address oldRegistryAddress,
         address newRegistryAddress
     );
+
+    /// @notice Event emitted when the ERC6551 salt is updated
     event ERC6551SaltUpdated(bytes32 oldSalt, bytes32 newSalt);
+
+    /// @notice Event emitted when the ERC6551 implementation is updated
     event ERC6551ImplementationUpdated(
         address oldImplementationAddress,
         address newImplementationAddress
     );
 
+    /// @notice Constructor for the ERC6551Manager contract
+    /// @param _registryAddress The address of the ERC6551 registry
+    /// @param _implementationAddress The address of the ERC6551 implementation
+    /// @param _salt The salt value for the ERC6551
+    /// @param _owner The owner of the contract
     constructor(
         address _registryAddress,
         address _implementationAddress,
@@ -107,17 +118,14 @@ contract ERC6551Manager is AccessControl {
             INTERFACE_ID_ERC721
         );
 
-        IERC6551Registry _tokenboundRegistry = IERC6551Registry(
-            erc6551RegistryAddress
-        );
-
-        tokenBoundAccountAddress = _tokenboundRegistry.account(
-            erc6551ImplementationAddress,
-            erc6551Salt,
-            _getChainId(),
-            _nftContractAddress,
-            _tokenId
-        );
+        tokenBoundAccountAddress = IERC6551Registry(erc6551RegistryAddress)
+            .account(
+                erc6551ImplementationAddress,
+                erc6551Salt,
+                _getChainId(),
+                _nftContractAddress,
+                _tokenId
+            );
     }
 
     /// @notice Deploy the NFT's token bound account address if it is not already deployed
@@ -134,17 +142,14 @@ contract ERC6551Manager is AccessControl {
             INTERFACE_ID_ERC721
         );
 
-        IERC6551Registry _tokenboundRegistry = IERC6551Registry(
-            erc6551RegistryAddress
-        );
-
-        tokenBoundAccountAddress = _tokenboundRegistry.createAccount(
-            erc6551ImplementationAddress,
-            erc6551Salt,
-            _getChainId(),
-            _nftContractAddress,
-            _tokenId
-        );
+        tokenBoundAccountAddress = IERC6551Registry(erc6551RegistryAddress)
+            .createAccount(
+                erc6551ImplementationAddress,
+                erc6551Salt,
+                _getChainId(),
+                _nftContractAddress,
+                _tokenId
+            );
     }
 
     /// @notice Retrieve the chain id of the network where the contract is deployed

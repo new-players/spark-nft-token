@@ -4,6 +4,7 @@ require("hardhat-deploy");
 require("hardhat-contract-sizer");
 require("@nomiclabs/hardhat-solhint");
 require("@nomicfoundation/hardhat-chai-matchers");
+require("hardhat-interface-generator");
 
 const COMPILER_SETTINGS = {
     optimizer: {

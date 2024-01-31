@@ -17,6 +17,9 @@ import "./Helpers/Validator.sol";
 contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
     using SafeERC20 for IERC20;
 
+    /// @notice Access control manager role
+    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
+
     /// @dev ERC721 interface id to check the ERC721 compatibility
     bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;
 
@@ -90,6 +93,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
     error InsufficientRewardsInTreasury();
     error InsufficientPayment();
     error InsufficientRewards();
+    error ManagerRoleMissing();
 
     /// @notice Event emitted when a Spark Identity is minted
     event SparkIdentityMinted(address indexed toAddress, uint256 sparkId);
@@ -160,29 +164,36 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         bool[] status
     );
 
+    /// @notice Custom modifier which checks for manager role
+    modifier onlyManagerRole() {
+        if (
+            !hasRole(MANAGER_ROLE, _msgSender()) &&
+            !hasRole(DEFAULT_ADMIN_ROLE, _msgSender())
+        ) {
+            revert ManagerRoleMissing();
+        }
+        _;
+    }
+
     /**
      * @dev Initializes the contract by setting up various configurations and roles.
      * @param _sparkIdentityAddress Address of the Spark Identity contract.
-     * @param _erc6551ManagerAddress Address of the ERC6551 Manager contract.
      * @param _rewardTokenAddress Address of the token used for rewards.
      * @param _beneficiaryAddress Address that will receive payments.
      * @param _admin Address that will be granted the default admin role.
      */
     constructor(
         address _sparkIdentityAddress,
-        address _erc6551ManagerAddress,
         address _rewardTokenAddress,
         address _beneficiaryAddress,
         address _admin
     ) {
         Validator.checkForZeroAddress(_sparkIdentityAddress);
-        Validator.checkForZeroAddress(_erc6551ManagerAddress);
         Validator.checkForZeroAddress(_rewardTokenAddress);
         Validator.checkForZeroAddress(_beneficiaryAddress);
         Validator.checkForZeroAddress(_admin);
 
         sparkIdentity = ISparkIdentity(_sparkIdentityAddress);
-        erc6551Manager = IERC6551Manager(_erc6551ManagerAddress);
 
         PaymentConfiguration storage paymentConfig = paymentConfiguration;
         paymentConfig.beneficiaryAddress = _beneficiaryAddress;
@@ -191,6 +202,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         rewardConfig.rewardTokenAddress = _rewardTokenAddress;
 
         _grantRole(DEFAULT_ADMIN_ROLE, _admin);
+        _grantRole(MANAGER_ROLE, _admin);
     }
 
     /**
@@ -216,6 +228,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         uint256 _tokenId
     ) external view returns (address tokenboundAddress) {
         Validator.checkForZeroAddress(_nftContractAddress);
+        Validator.checkForZeroAddress(address(erc6551Manager));
 
         tokenboundAddress = erc6551Manager.getTokenBoundAccount(
             _nftContractAddress,
@@ -257,7 +270,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         address[] calldata _tokens,
         uint256[] calldata _amounts,
         bool[] calldata _status
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyManagerRole {
         uint256 tokensLength = _tokens.length;
 
         if (tokensLength == 0) {
@@ -332,7 +345,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
      */
     function depositRewards(
         uint256 _amount
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyManagerRole {
         if (_amount == 0) {
             revert RewardAmountCannotBeZero();
         }
@@ -351,7 +364,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
      */
     function withdrawRewards(
         uint256 _amount
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyManagerRole {
         if (_amount == 0) {
             revert RewardAmountCannotBeZero();
         }
@@ -377,7 +390,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
     function whitelistNftsForRewards(
         address[] calldata _nftAddresses,
         bool[] calldata _status
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyManagerRole {
         uint256 nftsLength = _nftAddresses.length;
 
         if (nftsLength == 0) {
@@ -511,6 +524,8 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         address _nftAddress,
         uint256 _tokenId
     ) internal returns (address tokenboundAddress) {
+        Validator.checkForZeroAddress(address(erc6551Manager));
+        
         tokenboundAddress = erc6551Manager.createTokenBoundAccount(
             _nftAddress,
             _tokenId
@@ -521,7 +536,9 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
      * @dev Generates rewards for a given address.
      * @param _to The address to generate rewards for.
      */
-    function _generateRewards(address _to) internal {}
+    function _generateRewards(address _to) internal {
+        // Rewards for non nft spark mint
+    }
 
     /**
      * @dev Generates rewards for a given NFT contract.

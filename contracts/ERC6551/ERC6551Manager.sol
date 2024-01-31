@@ -13,9 +13,6 @@ contract ERC6551Manager is AccessControlEnumerable {
     // ERC721 interface id to check the ERC721 compatibility
     bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;
 
-    // Access control roles
-    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
-
     // Use 0 bytes32 value as salt - It is officially used by tokenbound.orgs
     bytes32 public erc6551Salt;
 
@@ -57,7 +54,6 @@ contract ERC6551Manager is AccessControlEnumerable {
         Validator.checkForZeroBytes32(_salt);
 
         _grantRole(DEFAULT_ADMIN_ROLE, _owner);
-        _grantRole(MANAGER_ROLE, _owner);
 
         erc6551RegistryAddress = _registryAddress;
         erc6551ImplementationAddress = _implementationAddress;
@@ -68,7 +64,7 @@ contract ERC6551Manager is AccessControlEnumerable {
     /// @param _registryAddress ERC 6551 registry contract address
     function setupERC6551Registry(
         address _registryAddress
-    ) external onlyRole(MANAGER_ROLE) {
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         Validator.checkForZeroAddress(_registryAddress);
 
         address oldRegistryAddress = erc6551RegistryAddress;
@@ -81,7 +77,7 @@ contract ERC6551Manager is AccessControlEnumerable {
     /// @param _implementationAddress ERC 6551 implementation contract address
     function setupERC6551Implementation(
         address _implementationAddress
-    ) external onlyRole(MANAGER_ROLE) {
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         Validator.checkForZeroAddress(_implementationAddress);
 
         address oldImplementationAddress = erc6551ImplementationAddress;
@@ -95,7 +91,7 @@ contract ERC6551Manager is AccessControlEnumerable {
 
     /// @notice Configure the salt for the creation and lookup of token bound account
     /// @param _salt ERC 6551 salt value (zero is officially used)
-    function setupERC6551Salt(bytes32 _salt) external onlyRole(MANAGER_ROLE) {
+    function setupERC6551Salt(bytes32 _salt) external onlyRole(DEFAULT_ADMIN_ROLE) {
         Validator.checkForZeroBytes32(_salt);
 
         bytes32 oldSalt = erc6551Salt;

@@ -53,7 +53,7 @@ contract SparkIdentity is ERC721, AccessControlEnumerable {
     function setBaseURI(
         string calldata _baseUri
     ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        Validator.checkForZeroBytes(bytes(_baseUri));
+        Validator.checkForZeroBytes(abi.encodePacked(_baseUri));
 
         baseURI = _baseUri;
     }

@@ -5,6 +5,10 @@ import "solmate/src/utils/CREATE3.sol";
 import "@openzeppelin/contracts/access/extensions/AccessControlEnumerable.sol";
 import "../Helpers/Validator.sol";
 
+/// @title SparkIdentityTokenFactory contract
+/// @author Venkatesh
+/// @notice This contract is used to manage the deployment of SparkIdentityToken contracts
+/// @custom:security-contact rvenki666@gmail.com
 contract SparkIdentityTokenFactory is AccessControlEnumerable {
     bytes32 public constant DEPLOYER_ROLE = keccak256("DEPLOYER_ROLE");
 
@@ -12,11 +16,13 @@ contract SparkIdentityTokenFactory is AccessControlEnumerable {
     error InvalidSalt();
     error InvalidBytecode();
 
+    /// @notice Event emitted when a new SparkIdentityToken contract is deployed
     event SparkIdentityTokenContractDeployed(
         address indexed contractAddress,
         address indexed deployedBy
     );
 
+    /// @notice Modifier to allow only deployer and admin roles to call a function
     modifier onlyDeployer() {
         if (
             !hasRole(DEPLOYER_ROLE, _msgSender()) &&
@@ -27,6 +33,8 @@ contract SparkIdentityTokenFactory is AccessControlEnumerable {
         _;
     }
 
+    /// @notice Constructor for the SparkIdentityTokenFactory contract
+    /// @param _owner The owner of the contract
     constructor(address _owner) {
         Validator.checkForZeroAddress(_owner);
 
@@ -34,6 +42,11 @@ contract SparkIdentityTokenFactory is AccessControlEnumerable {
         _grantRole(DEPLOYER_ROLE, _owner);
     }
 
+    /// @notice Deploys a new contract using CREATE3
+    /// @param _amount The amount of ether to send with the contract
+    /// @param _salt The salt value for the contract
+    /// @param _bytecode The bytecode of the contract
+    /// @return deployedContractAddress The address of the deployed contract
     function determinsiticDeploy(
         uint256 _amount,
         bytes32 _salt,
@@ -54,6 +67,9 @@ contract SparkIdentityTokenFactory is AccessControlEnumerable {
         emit SparkIdentityTokenContractDeployed(deployedContractAddress, msg.sender);
     }
 
+    /// @notice Computes the address of a contract deployed with CREATE3
+    /// @param _salt The salt value used in the deployment
+    /// @return contractAddress The address of the contract
     function computeAddress(
         bytes32 _salt
     ) external view returns (address contractAddress) {

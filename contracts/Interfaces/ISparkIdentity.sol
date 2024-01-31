@@ -36,14 +36,7 @@ interface ISparkIdentity {
         bytes memory data
     ) external;
 
-    function safeMint(address _to) external;
-
-    function safeMintERC6551(address _nftAddress, uint256 _nftTokenId) external;
-
-    function getTokenboundAccountAddress(
-        address _nftAddress,
-        uint256 _tokenId
-    ) external view returns (address tokenboundAddress);
+    function safeMint(address _to) external returns (uint256 sparkId);
 
     function setBaseURI(string calldata _baseUri) external;
 

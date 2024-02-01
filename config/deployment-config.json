@@ -1,0 +1,394 @@
+{
+    "local": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "mumbai": {
+        "ERC6551Manager": {
+            "registry": "0x000000006551c19487814612e58FE06813775758",
+            "tokenboundAccountProxy": "0x55266d75D1a14E4572138116aF39863Ed6596E7F",
+            "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
+            "salt": 0,
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "contractAddress": "0x779cA22Bffe9ac39c42991ce6A92B1A1a473fDF3"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "contractAddress": "0xaf482Ebb5bC3e022D0fDD693f5d3ae4065BaF6fc"
+        },
+        "SparkRegistryFactory": {
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "contractAddress": "0xAd88A35E8e52A32b1eC7365E3CfDf9290FaC75dB"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "baseUri": "https://arcadians.staging.outplay.games/v2/arcadians/",
+            "contractAddress": "0x446670a66CF186FF18758ACba151c4f9F5564166"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "rewardTokenAddress": "0xe4b6D882014995712fB1192aC16B3127df1E44B1",
+            "contractAddress": "0xB79E8B1273b244b42E7569C28B2310529FdEd6F8",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "0.001",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "0xe4b6D882014995712fB1192aC16B3127df1E44B1",
+                    "amountInEther": "1",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "100",
+            "rewardsPerMintInEther": "10",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "0x74f9fe4BCDA46C93c489AEdd831E79D1C9F742a8",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "goerli": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "sepolia": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "fuji": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "polygon": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "ethereum": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "avalanche": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    }
+}

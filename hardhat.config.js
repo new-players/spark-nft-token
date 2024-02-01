@@ -34,49 +34,50 @@ const AVALANCHE_RPC_URL = process.env.AVALANCHE_RPC_URL;
 
 const GOERLI_DEPLOYMENT_SETTINGS = {
     url: GOERLI_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 5
 };
 
 const MUMBAI_DEPLOYMENT_SETTINGS = {
     url: MUMBAI_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 80001,
 }
 
 const SEPOLIA_DEPLOYMENT_SETTINGS = {
     url: SEPOLIA_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 11155111,
 }
 
 const FUJI_DEPLOYMENT_SETTINGS = {
     url: FUJI_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 43113
 };
 
 const POLYGON_DEPLOYMENT_SETTINGS = {
     url: POLYGON_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 137
 };
 
 const ETHEREUM_DEPLOYMENT_SETTINGS = {
     url: ETHEREUM_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 1
 };
 
 const AVALANCHE_DEPLOYMENT_SETTINGS = {
     url: AVALANCHE_RPC_URL,
-    accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 43114
 };
 
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const AVALANCHE_API_KEY = process.env.AVALANCHE_API_KEY;
+
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
     solidity: {
@@ -91,11 +92,11 @@ module.exports = {
         hardhat: {
             chainId: 31337,
             // uncomment when forking is required
-            forking: {
-                url: GOERLI_RPC_URL,
-                accounts: PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
-                blockNumber: FORKING_BLOCK_NUMBER
-            }
+            // forking: {
+            //     url: GOERLI_RPC_URL,
+            //     accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+            //     blockNumber: FORKING_BLOCK_NUMBER
+            // }
         },
         localhost: {
             chainId: 31337,

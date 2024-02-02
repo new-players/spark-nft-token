@@ -55,28 +55,28 @@
             "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
             "salt": 0,
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "0x779cA22Bffe9ac39c42991ce6A92B1A1a473fDF3"
+            "contractAddress": "0xcD4D1F7fED5e1Fe9D65B80d1AE3d3776203a2b7F"
         },
         "SparkIdentityTokenFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "0xaf482Ebb5bC3e022D0fDD693f5d3ae4065BaF6fc"
+            "contractAddress": "0xb9feF9F9022562Aa7431d9A2109ca4bCf8d63536"
         },
         "SparkRegistryFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "0xAd88A35E8e52A32b1eC7365E3CfDf9290FaC75dB"
+            "contractAddress": "0x19Ec14Bc01Fd862B4fb731fb145369F59227d139"
         },
         "SparkIdentity": {
             "name": "SparkIdentity",
             "symbol": "SPID",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "baseUri": "https://arcadians.staging.outplay.games/v2/arcadians/",
-            "contractAddress": "0x446670a66CF186FF18758ACba151c4f9F5564166"
+            "contractAddress": "0xF2771829Ac9793dedF6A8Ee3a0C3CAC8A58fBe03"
         },
         "SparkRegistry": {
             "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "rewardTokenAddress": "0xe4b6D882014995712fB1192aC16B3127df1E44B1",
-            "contractAddress": "0xB79E8B1273b244b42E7569C28B2310529FdEd6F8",
+            "contractAddress": "0x24BCD1249bCBd531A732E4a735c6DBF419976fA5",
             "isPaymentEnabled": true,
             "nativePaymentAmountInEther": "0.001",
             "paymentTokens": [

@@ -4,6 +4,7 @@ pragma solidity 0.8.20;
 import "@openzeppelin/contracts/access/extensions/AccessControlEnumerable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/interfaces/IERC20.sol";
+import "@openzeppelin/contracts/interfaces/IERC721.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "../Interfaces/IERC6551Manager.sol";
 import "../Interfaces/ISparkIdentity.sol";
@@ -77,6 +78,9 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
     /// @notice Mapping of user addresses to their claimed rewards
     mapping(address => uint256) public userRewardsClaimed;
 
+    /// @notice Total reward supply
+    uint256 public totalRewardSupply;
+
     /// @dev Custom errors for handling specific revert conditions
     error PaymentFailed();
     error RefundFailed();
@@ -94,6 +98,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
     error InsufficientPayment();
     error InsufficientRewards();
     error ManagerRoleMissing();
+    error OnlyNFTOwnerCanMint();
 
     /// @notice Event emitted when a Spark Identity is minted
     event SparkIdentityMinted(address indexed toAddress, uint256 sparkId);
@@ -353,6 +358,8 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         RewardConfiguration storage rewardConfig = rewardConfiguration;
         address rewardTokenAddress = rewardConfig.rewardTokenAddress;
 
+        totalRewardSupply += _amount;
+
         _transferTokensIn(rewardTokenAddress, msg.sender, _amount);
 
         emit RewardsDeposited(msg.sender, rewardTokenAddress, _amount);
@@ -369,9 +376,15 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
             revert RewardAmountCannotBeZero();
         }
 
+        if (_amount > totalRewardSupply) {
+            revert InsufficientRewardsInTreasury();
+        }
+
         PaymentConfiguration storage paymentConfig = paymentConfiguration;
         RewardConfiguration storage rewardConfig = rewardConfiguration;
         address rewardTokenAddress = rewardConfig.rewardTokenAddress;
+
+        totalRewardSupply -= _amount;
 
         _transferTokensOut(
             rewardTokenAddress,
@@ -453,36 +466,33 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
             revert InsufficientRewards();
         }
 
-        RewardConfiguration storage rewardConfig = rewardConfiguration;
-        address rewardTokenAddress = rewardConfig.rewardTokenAddress;
-
-        if (_reward > IERC20(rewardTokenAddress).balanceOf(address(this))) {
+        if (_reward > totalRewardSupply) {
             revert InsufficientRewardsInTreasury();
         }
 
-        userRewardsClaimed[msg.sender] += _reward;
+        RewardConfiguration storage rewardConfig = rewardConfiguration;
+        address rewardTokenAddress = rewardConfig.rewardTokenAddress;
 
-        IERC20(rewardTokenAddress).safeTransfer(msg.sender, _reward);
+        userRewardsClaimed[msg.sender] += _reward;
+        totalRewardSupply -= _reward;
+
+        _transferTokensOut(rewardTokenAddress, msg.sender, _reward);
 
         emit RewardsClaimed(msg.sender, rewardTokenAddress, _reward);
     }
 
     /**
      * @dev Mints a new Spark Identity for a given address.
-     * @param _to The address to mint the Spark Identity for.
      * @param paymentPayload The payment details for minting the Spark Identity.
      */
     function mintSparkIdentity(
-        address _to,
         PaymentPayload calldata paymentPayload
     ) external nonReentrant {
-        Validator.checkForZeroAddress(_to);
-
         _processPayment(paymentPayload);
-        uint256 sparkId = sparkIdentity.safeMint(_to);
-        _generateRewards(_to);
+        uint256 sparkId = sparkIdentity.safeMint(msg.sender);
+        _generateRewards(msg.sender);
 
-        emit SparkIdentityMinted(_to, sparkId);
+        emit SparkIdentityMinted(msg.sender, sparkId);
     }
 
     /**
@@ -497,6 +507,10 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         PaymentPayload calldata paymentPayload
     ) external nonReentrant {
         Validator.checkForZeroAddress(_nftContractAddress);
+        
+        if (IERC721(_nftContractAddress).ownerOf(_tokenId) != msg.sender) {
+            revert OnlyNFTOwnerCanMint();
+        }
 
         _processPayment(paymentPayload);
         address tokenboundAddress = _createOrGetNftTokenboundAccount(

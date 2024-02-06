@@ -101,14 +101,15 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
     error OnlyNFTOwnerCanMint();
 
     /// @notice Event emitted when a Spark Identity is minted
-    event SparkIdentityMinted(address indexed toAddress, uint256 sparkId);
+    event SparkIdentityMinted(address indexed toAddress, uint256 sparkId, address mintedBy);
 
     /// @notice Event emitted when a Spark Identity is minted for an ERC6551 token
     event SparkIdentityMintedForERC6551(
         address indexed tokenboundAddress,
         address indexed nftAddress,
         uint256 indexed nftTokenId,
-        uint256 sparkId
+        uint256 sparkId,
+        address mintedBy
     );
 
     /// @notice Event emitted when rewards are claimed
@@ -487,12 +488,12 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
      */
     function mintSparkIdentity(
         PaymentPayload calldata paymentPayload
-    ) external nonReentrant {
+    ) external payable nonReentrant {
         _processPayment(paymentPayload);
         uint256 sparkId = sparkIdentity.safeMint(msg.sender);
         _generateRewards(msg.sender);
 
-        emit SparkIdentityMinted(msg.sender, sparkId);
+        emit SparkIdentityMinted(msg.sender, sparkId, msg.sender);
     }
 
     /**
@@ -505,7 +506,7 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
         address _nftContractAddress,
         uint256 _tokenId,
         PaymentPayload calldata paymentPayload
-    ) external nonReentrant {
+    ) external payable nonReentrant {
         Validator.checkForZeroAddress(_nftContractAddress);
         
         if (IERC721(_nftContractAddress).ownerOf(_tokenId) != msg.sender) {
@@ -524,7 +525,8 @@ contract SparkRegistry is ReentrancyGuard, AccessControlEnumerable {
             tokenboundAddress,
             _nftContractAddress,
             _tokenId,
-            sparkId
+            sparkId,
+            msg.sender
         );
     }
 

@@ -19,6 +19,12 @@ module.exports = async ({ deployments }) => {
 
     const waitConfirmation = network.config.chainId === 31337 ? 0 : 6;
 
+    const minterRole = await SparkIdentity.MINTER_ROLE();
+    const grantMinterRoleTx = await SparkIdentity.grantRole(minterRole, SparkRegistryInfo.contractAddress);
+    await grantMinterRoleTx.wait(waitConfirmation);
+
+    log("Spark Identity minter role is granted to spark registry contract");
+
     if (SparkIdentityInfo.baseUri && SparkIdentityInfo.baseUri.length > 0) {
         const baseUriTx = await SparkIdentity.setBaseURI(SparkIdentityInfo.baseUri);
         await baseUriTx.wait(waitConfirmation);

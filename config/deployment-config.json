@@ -55,33 +55,33 @@
             "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
             "salt": 0,
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "0xcD4D1F7fED5e1Fe9D65B80d1AE3d3776203a2b7F"
+            "contractAddress": "0xAff1E468C13F39fb7827d61FBA816F03FA6eC472"
         },
         "SparkIdentityTokenFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "0xb9feF9F9022562Aa7431d9A2109ca4bCf8d63536"
+            "contractAddress": "0x22C46A236A16b6C436F90c90938249d207F747c7"
         },
         "SparkRegistryFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "0x19Ec14Bc01Fd862B4fb731fb145369F59227d139"
+            "contractAddress": "0xFFB8446c654C507cb1E0e55066AA5bF115BD9fDe"
         },
         "SparkIdentity": {
             "name": "SparkIdentity",
             "symbol": "SPID",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "baseUri": "https://arcadians.staging.outplay.games/v2/arcadians/",
-            "contractAddress": "0xF2771829Ac9793dedF6A8Ee3a0C3CAC8A58fBe03"
+            "contractAddress": "0x1CFfb35b3736BA6b6E1208569650F5aDd7d8040c"
         },
         "SparkRegistry": {
             "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "rewardTokenAddress": "0xe4b6D882014995712fB1192aC16B3127df1E44B1",
-            "contractAddress": "0x24BCD1249bCBd531A732E4a735c6DBF419976fA5",
+            "rewardTokenAddress": "0xC73fE8d94E3419463da5FfEB914592f20729E9Ec",
+            "contractAddress": "0x981a3fCD6eE4f0d69e6eD20D1331F6994DC33e80",
             "isPaymentEnabled": true,
             "nativePaymentAmountInEther": "0.001",
             "paymentTokens": [
                 {
-                    "tokenAddress": "0xe4b6D882014995712fB1192aC16B3127df1E44B1",
+                    "tokenAddress": "0xC73fE8d94E3419463da5FfEB914592f20729E9Ec",
                     "amountInEther": "1",
                     "status": true
                 }
@@ -91,7 +91,7 @@
             "rewardsPerMintInEther": "10",
             "rewardableNfts": [
                 {
-                    "nftAddress": "0x74f9fe4BCDA46C93c489AEdd831E79D1C9F742a8",
+                    "nftAddress": "0x4453c0d99370C45b2AD872cef9C1Ec857796c4c4",
                     "status": true
                 }
             ]

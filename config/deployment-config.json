@@ -69,7 +69,7 @@
             "name": "SparkIdentity",
             "symbol": "SPID",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "baseUri": "https://arcadians.staging.outplay.games/v2/arcadians/",
+            "baseUri": "https://backend.dev.spark.arcadia.fun/v1/nft/identity/",
             "contractAddress": "0x1CFfb35b3736BA6b6E1208569650F5aDd7d8040c"
         },
         "SparkRegistry": {
@@ -118,7 +118,7 @@
             "name": "SparkIdentity",
             "symbol": "SPID",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "baseUri": "https://arcadians.staging.outplay.games/v2/arcadians/",
+            "baseUri": "https://backend.dev.spark.arcadia.fun/v1/nft/identity/",
             "contractAddress": "0x68650ffCf981F77F717bC04D33903D7fE0EdC947"
         },
         "SparkRegistry": {

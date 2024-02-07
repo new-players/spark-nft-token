@@ -63,7 +63,7 @@ module.exports = async ({ deployments }) => {
         },
     };
 
-    await fs.writeFile("config/deployment-config.json", JSON.stringify(config), "utf8");
+    await fs.writeFile("config/deployment-config.json", JSON.stringify(config, null, 4), "utf8");
 
     // Verify the contract on Etherscan for networks other than localhost
     if (network.config.chainId !== 31337) {

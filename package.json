@@ -38,8 +38,12 @@
     "hardhat-deploy": "^0.11.45",
     "hardhat-gas-reporter": "^1.0.9",
     "hardhat-interface-generator": "^0.0.6",
+    "prettier": "^2.8.4",
     "solidity-coverage": "^0.8.5",
     "solmate": "^6.2.0",
-    "typechain": "^8.3.0"
+    "ts-node": "^10.9.1",
+    "typechain": "^8.3.0",
+    "typescript": "^5.1.6"
+
   }
 }

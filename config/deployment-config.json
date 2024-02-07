@@ -1,51 +1,46 @@
 {
-    "local": {
+    "hardhat": {
         "ERC6551Manager": {
-            "registry": "<required>",
-            "tokenboundAccountProxy": "<required>",
-            "tokenboundAccountImplementation": "<required>",
+            "registry": "0x000000006551c19487814612e58FE06813775758",
+            "tokenboundAccountProxy": "0x55266d75D1a14E4572138116aF39863Ed6596E7F",
+            "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
             "salt": 0,
-            "owner": "<required>",
-            "contractAddress": "<deployed_contract_address>"
+            "owner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
         },
         "SparkIdentityTokenFactory": {
-            "owner": "<required>",
-            "contractAddress": "<deployed_contract_address>"
+            "owner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "contractAddress": "0x8464135c8F25Da09e49BC8782676a84730C318bC"
         },
         "SparkRegistryFactory": {
-            "owner": "<required>",
-            "contractAddress": "<deployed_contract_address>"
+            "owner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "contractAddress": "0x71C95911E9a5D330f4D621842EC243EE1343292e"
         },
         "SparkIdentity": {
             "name": "SparkIdentity",
             "symbol": "SPID",
-            "owner": "<required>",
-            "baseUri": "<required>",
-            "contractAddress": "<deployed_contract_address>"
+            "owner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "baseUri": "https://backend.dev.spark.arcadia.fun/v1/nft/identity/",
+            "contractAddress": "0x94632675f327b1e3f5b2CA6602045a638B58A98D"
         },
         "SparkRegistry": {
-            "beneficiaryAddress": "<required>",
-            "owner": "<required>",
-            "rewardTokenAddress": "<required>",
-            "contractAddress": "<deployed_contract_address>",
+            "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "owner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "rewardTokenAddress": "0x068cC050184F4051aB910BF20BfF899fFB30D971",
+            "contractAddress": "0xD35A2DF13417C4f1780D834498117DaACE411161",
             "isPaymentEnabled": true,
-            "nativePaymentAmountInEther": "<required>",
+            "nativePaymentAmountInEther": "0.001",
             "paymentTokens": [
                 {
-                    "tokenAddress": "<required>",
-                    "amountInEther": "<required>",
+                    "tokenAddress": "0x068cC050184F4051aB910BF20BfF899fFB30D971",
+                    "amountInEther": "10",
                     "status": true
                 }
             ],
             "isRewardsEnabled": true,
-            "maxRewardsPerUserInEther": "<required>",
-            "rewardsPerMintInEther": "<required>",
-            "rewardableNfts": [
-                {
-                    "nftAddress": "<required>",
-                    "status": true
-                }
-            ]
+            "maxRewardsPerUserInEther": "100",
+            "rewardsPerMintInEther": "10",
+            "rewardableNfts": []
         }
     },
     "mumbai": {

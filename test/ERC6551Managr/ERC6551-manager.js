@@ -12,6 +12,7 @@ let ERC6551Manager;
 let deployer;
 let userOne;
 let userTwo;
+let randomAddress = '0xC73fE8d94E3419463da5FfEB914592f20729E9Ec';
 let MockNFT;
 let ERC6551Registry;
 let ERC6551AccountProxy;
@@ -102,52 +103,36 @@ describe("ERC6551 Manager Unit Test Cases", () => {
         await expect(ERC6551Manager.connect(userTwo).setupERC6551Salt(ERC6551Salt)).to.be.reverted;
     });
 
-    // it("Configure ERC6551 implementation address", async () => {
-    //     await expect(ERC6551Manager.setupERC6551Implementation(ethers.ZeroAddress)).to.be.reverted;
-    //     await ERC6551Manager.setupERC6551Implementation(randomAddress);
-    //     await expect(formatAddress(await ERC6551Manager.erc6551ImplementationAddress())).to.equal(
-    //         formatAddress(randomAddress)
-    //     );
-    //     await ERC6551Manager.setupERC6551Implementation(ERC6551AccountImplementation);
-    //     await expect(formatAddress(await ERC6551Manager.erc6551ImplementationAddress())).to.equal(
-    //         formatAddress(ERC6551AccountImplementation)
-    //     );
-    // });
 
-    // it("Configure ERC6551 registry address", async () => {
-    //     await expect(ERC6551Manager.setupERC6551Registry(ethers.ZeroAddress)).to.be.reverted;
-    //     await ERC6551Manager.setupERC6551Registry(randomAddress);
-    //     await expect(formatAddress(await ERC6551Manager.erc6551RegistryAddress())).to.equal(
-    //         formatAddress(randomAddress)
-    //     );
-    //     await ERC6551Manager.setupERC6551Registry(ERC6551Registry);
-    //     await expect(formatAddress(await ERC6551Manager.erc6551RegistryAddress())).to.equal(
-    //         formatAddress(ERC6551Registry)
-    //     );
-    // });
+    it("Configure ERC6551 registry address", async () => {
+        await expect(ERC6551Manager.setupERC6551Registry(ethers.ZeroAddress)).to.be.revertedWithCustomError(ERC6551Manager, 'ZeroAddressNotAllowed');
+        await expect(ERC6551Manager.setupERC6551Registry(randomAddress)).not.to.be.reverted;
+        await expect(formatAddress(await ERC6551Manager.erc6551RegistryAddress())).to.equal(
+            formatAddress(randomAddress)
+        );
+    });
 
-    // it("Configure ERC6551 salt", async () => {
-    //     const abiCoder = new ethers.AbiCoder();
+    it("Configure ERC6551 Proxy address", async () => {
+        await expect(ERC6551Manager.setupERC6551Proxy(ethers.ZeroAddress)).to.be.revertedWithCustomError(ERC6551Manager, 'ZeroAddressNotAllowed');
+        await expect(ERC6551Manager.setupERC6551Proxy(randomAddress)).not.to.be.reverted;
+        await expect(formatAddress(await ERC6551Manager.erc6551ProxyAddress())).to.equal(
+            formatAddress(randomAddress)
+        );
+    });
 
-    //     await ERC6551Manager.setupERC6551Salt(abiCoder.encode(['uint256'], [1]));
-    //     await expect(await ERC6551Manager.erc6551Salt()).to.equal(abiCoder.encode(['uint256'], [1]));
-    //     await ERC6551Manager.setupERC6551Salt(ERC6551Salt);
-    //     await expect(await ERC6551Manager.erc6551Salt()).to.equal(ERC6551Salt);
-    // });
+    it("Configure ERC6551 implementation address", async () => {
+        await expect(ERC6551Manager.setupERC6551Implementation(ethers.ZeroAddress)).to.be.revertedWithCustomError(ERC6551Manager, 'ZeroAddressNotAllowed');
+        await expect(ERC6551Manager.setupERC6551Implementation(randomAddress)).not.to.be.reverted;
+        await expect(formatAddress(await ERC6551Manager.erc6551ImplementationAddress())).to.equal(
+            formatAddress(randomAddress)
+        );
+    });
 
-    // it("Mint Mock NFT", async () => {
-    //     await MockNFT.safeMint(userOne);
-    //     await expect(await MockNFT.balanceOf(userOne)).to.equal(1);
-
-    //     await MockNFT.safeMint(userTwo);
-    //     await expect(await MockNFT.balanceOf(userTwo)).to.equal(1);
-    // });
-
-    // it("Check Mock NFT tokenURI", async () => {
-    //     await expect(await MockNFT.tokenURI(1)).to.equal(
-    //         "https://arcadians.dev.outplay.games/v2/arcadians/1"
-    //     );
-    // });
+    it("Configure ERC6551 salt", async () => {
+        const abiCoder = new ethers.AbiCoder();
+        await expect(ERC6551Manager.setupERC6551Salt(abiCoder.encode(['uint256'], [1]))).not.to.be.reverted;
+        await expect(await ERC6551Manager.erc6551Salt()).to.equal(abiCoder.encode(['uint256'], [1]));
+    });
 
     // it("Check token bound account for NFT", async () => {
     //     const tokenBoundAccount = await ERC6551Manager.getTokenBoundAccount(

@@ -44,4 +44,4 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
     }
 }
 
-module.exports.tags = ["SparkIdentityTokenFactory", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "polygon", "ethereum", "avalanche", "base"];
+module.exports.tags = ["SparkIdentityTokenFactory", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "polygon", "ethereum", "avalanche", "base"];

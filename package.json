@@ -16,6 +16,7 @@
     "deploy:sepolia": "hardhat deploy --network sepolia --tags sepolia --tags-require-all",
     "deploy:fuji": "hardhat deploy --network fuji --tags fuji --tags-require-all",
     "deploy:baseSepolia": "hardhat deploy --network baseSepolia --tags baseSepolia --tags-require-all",
+    "deploy:baseGoerli": "hardhat deploy --network baseGoerli --tags baseGoerli --tags-require-all",
     "deploy:polygon": "hardhat deploy --network polygon --tags polygon --tags-require-all",
     "deploy:ethereum": "hardhat deploy --network ethereum --tags ethereum --tags-require-all",
     "deploy:avalanche": "hardhat deploy --network avalanche --tags avalanche --tags-require-all",

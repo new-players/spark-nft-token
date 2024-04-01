@@ -48,4 +48,4 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
     }
 }
 
-module.exports.tags = ["ERC6551Manager", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "polygon", "ethereum", "avalanche", "base"];
+module.exports.tags = ["ERC6551Manager", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "polygon", "ethereum", "avalanche", "base"];

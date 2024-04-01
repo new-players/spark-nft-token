@@ -27,6 +27,7 @@ const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
 const FUJI_RPC_URL = process.env.FUJI_RPC_URL;
 const BASE_SEPOLIA_RPC_URL = process.env.BASE_SEPOLIA_RPC_URL;
+const BASE_GOERLI_RPC_URL = process.env.BASE_GOERLI_RPC_URL;
 
 const POLYGON_RPC_URL = process.env.POLYGON_RPC_URL;
 const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL;
@@ -56,6 +57,13 @@ const BASE_SEPOLIA_DEPLOYMENT_SETTINGS = {
     accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 84532,
 }
+
+const BASE_GOERLI_DEPLOYMENT_SETTINGS = {
+    url: BASE_GOERLI_RPC_URL,
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    chainId: 84531,
+}
+
 
 const POLYGON_DEPLOYMENT_SETTINGS = {
     url: POLYGON_RPC_URL,
@@ -113,6 +121,7 @@ module.exports = {
         sepolia: SEPOLIA_DEPLOYMENT_SETTINGS,
         fuji: FUJI_DEPLOYMENT_SETTINGS,
         baseSepolia: BASE_SEPOLIA_DEPLOYMENT_SETTINGS,
+        baseGoerli: BASE_GOERLI_DEPLOYMENT_SETTINGS,
         polygon: POLYGON_DEPLOYMENT_SETTINGS,
         ethereum: ETHEREUM_DEPLOYMENT_SETTINGS,
         avalanche: AVALANCHE_DEPLOYMENT_SETTINGS,
@@ -124,6 +133,7 @@ module.exports = {
             goerli: ETHERSCAN_API_KEY,
             sepolia: ETHERSCAN_API_KEY,
             avalancheFujiTestnet: AVALANCHE_API_KEY,
+            baseGoerli: BASE_API_KEY,
             mainnet: ETHERSCAN_API_KEY,
             polygon: POLYGONSCAN_API_KEY,
             avalanche: AVALANCHE_API_KEY,
@@ -166,7 +176,8 @@ module.exports = {
             43114: 0,
             43113: 0,
             8453: 0,
-            84532: 0
+            84532: 0,
+            84531: 0
         },
         factoryDeployer: {
             31337: 1,
@@ -177,7 +188,8 @@ module.exports = {
             43114: 1,
             43113: 1,
             8453: 1,
-            84532: 1
+            84532: 1,
+            84531: 1
         }
     },
     mocha: {

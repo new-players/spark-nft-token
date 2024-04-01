@@ -75,4 +75,4 @@ module.exports = async ({ deployments }) => {
     }
 }
 
-module.exports.tags = ["SparkRegistry", "all", "local", "mumbai", "sepolia", "goerli", "fuji", "polygon", "ethereum", "avalanche"];
+module.exports.tags = ["SparkRegistry", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "polygon", "ethereum", "avalanche", "base"];

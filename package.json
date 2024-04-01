@@ -12,13 +12,14 @@
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js",
     "chain": "hardhat node --network hardhat",
     "deploy:local": "hardhat deploy --tags local --tags-require-all",
-    "deploy:mumbai": "hardhat deploy --network mumbai --tags mumbai --tags-require-all",
     "deploy:goerli": "hardhat deploy --network goerli --tags goerli --tags-require-all",
     "deploy:sepolia": "hardhat deploy --network sepolia --tags sepolia --tags-require-all",
     "deploy:fuji": "hardhat deploy --network fuji --tags fuji --tags-require-all",
+    "deploy:baseSepolia": "hardhat deploy --network baseSepolia --tags baseSepolia --tags-require-all",
     "deploy:polygon": "hardhat deploy --network polygon --tags polygon --tags-require-all",
     "deploy:ethereum": "hardhat deploy --network ethereum --tags ethereum --tags-require-all",
-    "deploy:avalanche": "hardhat deploy --network avalanche --tags avalanche --tags-require-all"
+    "deploy:avalanche": "hardhat deploy --network avalanche --tags avalanche --tags-require-all",
+    "deploy:base": "hardhat deploy --network base --tags base --tags-require-all"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

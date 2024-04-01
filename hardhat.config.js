@@ -23,26 +23,21 @@ if (String(PRIVATE_KEY).toLowerCase() === String(FACTORY_DEPLOYER_PRIVATE_KEY).t
 const FORKING_BLOCK_NUMBER = parseInt(process.env.FORKING_BLOCK_NUMBER) || 0;
 const REPORT_GAS = process.env.REPORT_GAS || false;
 
-const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL;
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
 const FUJI_RPC_URL = process.env.FUJI_RPC_URL;
+const BASE_SEPOLIA_RPC_URL = process.env.BASE_SEPOLIA_RPC_URL;
 
 const POLYGON_RPC_URL = process.env.POLYGON_RPC_URL;
 const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL;
 const AVALANCHE_RPC_URL = process.env.AVALANCHE_RPC_URL;
+const BASE_RPC_URL = process.env.BASE_RPC_URL;
 
 const GOERLI_DEPLOYMENT_SETTINGS = {
     url: GOERLI_RPC_URL,
     accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 5
 };
-
-const MUMBAI_DEPLOYMENT_SETTINGS = {
-    url: MUMBAI_RPC_URL,
-    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
-    chainId: 80001,
-}
 
 const SEPOLIA_DEPLOYMENT_SETTINGS = {
     url: SEPOLIA_RPC_URL,
@@ -55,6 +50,12 @@ const FUJI_DEPLOYMENT_SETTINGS = {
     accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
     chainId: 43113
 };
+
+const BASE_SEPOLIA_DEPLOYMENT_SETTINGS = {
+    url: BASE_SEPOLIA_RPC_URL,
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    chainId: 84532,
+}
 
 const POLYGON_DEPLOYMENT_SETTINGS = {
     url: POLYGON_RPC_URL,
@@ -74,9 +75,16 @@ const AVALANCHE_DEPLOYMENT_SETTINGS = {
     chainId: 43114
 };
 
+const BASE_DEPLOYMENT_SETTINGS = {
+    url: BASE_RPC_URL,
+    accounts: PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [],
+    chainId: 8453,
+}
+
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const AVALANCHE_API_KEY = process.env.AVALANCHE_API_KEY;
+const BASE_API_KEY = process.env.BASE_API_KEY;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -101,25 +109,36 @@ module.exports = {
         localhost: {
             chainId: 31337,
         },
-        mumbai: MUMBAI_DEPLOYMENT_SETTINGS,
         goerli: GOERLI_DEPLOYMENT_SETTINGS,
         sepolia: SEPOLIA_DEPLOYMENT_SETTINGS,
+        fuji: FUJI_DEPLOYMENT_SETTINGS,
+        baseSepolia: BASE_SEPOLIA_DEPLOYMENT_SETTINGS,
         polygon: POLYGON_DEPLOYMENT_SETTINGS,
         ethereum: ETHEREUM_DEPLOYMENT_SETTINGS,
         avalanche: AVALANCHE_DEPLOYMENT_SETTINGS,
-        fuji: FUJI_DEPLOYMENT_SETTINGS
+        base: BASE_DEPLOYMENT_SETTINGS
     },
     defaultNetwork: "hardhat",
     etherscan: {
         apiKey: {
-            polygonMumbai: POLYGONSCAN_API_KEY,
             goerli: ETHERSCAN_API_KEY,
             sepolia: ETHERSCAN_API_KEY,
-            polygon: POLYGONSCAN_API_KEY,
+            avalancheFujiTestnet: AVALANCHE_API_KEY,
             mainnet: ETHERSCAN_API_KEY,
+            polygon: POLYGONSCAN_API_KEY,
             avalanche: AVALANCHE_API_KEY,
-            avalancheFujiTestnet: AVALANCHE_API_KEY
+            base: BASE_API_KEY
         },
+        customChains: [
+            {
+                network: "baseSepolia",
+                chainId: 84532,
+                urls: {
+                  apiURL: "https://api-sepolia.basescan.org/api",
+                  browserURL: "https://sepolia.basescan.org"
+                }
+            }
+        ]
     },
     gasReporter: {
         enabled: REPORT_GAS,
@@ -140,23 +159,25 @@ module.exports = {
         deployer: {
             default: 0,
             31337: 0,
-            80001: 0,
             5: 0,
             11155111: 0,
             137: 0,
             1: 0,
             43114: 0,
-            43113: 0
+            43113: 0,
+            8453: 0,
+            84532: 0
         },
         factoryDeployer: {
             31337: 1,
-            80001: 1,
             5: 1,
             11155111: 1,
             137: 1,
             1: 1,
             43114: 1,
-            43113: 1
+            43113: 1,
+            8453: 1,
+            84532: 1
         }
     },
     mocha: {

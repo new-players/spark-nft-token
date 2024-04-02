@@ -342,6 +342,55 @@
             ]
         }
     },
+    "optimisticSepolia": {
+        "ERC6551Manager": {
+            "registry": "0x000000006551c19487814612e58FE06813775758",
+            "tokenboundAccountProxy": "0x55266d75D1a14E4572138116aF39863Ed6596E7F",
+            "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
+            "salt": 0,
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "baseUri": "https://backend.dev.spark.arcadia.fun/v1/nft/identity/",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": false,
+            "nativePaymentAmountInEther": "0.001",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "10",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": false,
+            "maxRewardsPerUserInEther": "100",
+            "rewardsPerMintInEther": "10",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
     "polygon": {
         "ERC6551Manager": {
             "registry": "<required>",
@@ -490,6 +539,55 @@
         }
     },
     "base": {
+        "ERC6551Manager": {
+            "registry": "<required>",
+            "tokenboundAccountProxy": "<required>",
+            "tokenboundAccountImplementation": "<required>",
+            "salt": 0,
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentityTokenFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistryFactory": {
+            "owner": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkIdentity": {
+            "name": "SparkIdentity",
+            "symbol": "SPID",
+            "owner": "<required>",
+            "baseUri": "<required>",
+            "contractAddress": "<deployed_contract_address>"
+        },
+        "SparkRegistry": {
+            "beneficiaryAddress": "<required>",
+            "owner": "<required>",
+            "rewardTokenAddress": "<required>",
+            "contractAddress": "<deployed_contract_address>",
+            "isPaymentEnabled": true,
+            "nativePaymentAmountInEther": "<required>",
+            "paymentTokens": [
+                {
+                    "tokenAddress": "<required>",
+                    "amountInEther": "<required>",
+                    "status": true
+                }
+            ],
+            "isRewardsEnabled": true,
+            "maxRewardsPerUserInEther": "<required>",
+            "rewardsPerMintInEther": "<required>",
+            "rewardableNfts": [
+                {
+                    "nftAddress": "<required>",
+                    "status": true
+                }
+            ]
+        }
+    },
+    "optimisticEthereum": {
         "ERC6551Manager": {
             "registry": "<required>",
             "tokenboundAccountProxy": "<required>",

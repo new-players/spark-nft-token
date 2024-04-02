@@ -17,10 +17,12 @@
     "deploy:fuji": "hardhat deploy --network fuji --tags fuji --tags-require-all",
     "deploy:baseSepolia": "hardhat deploy --network baseSepolia --tags baseSepolia --tags-require-all",
     "deploy:baseGoerli": "hardhat deploy --network baseGoerli --tags baseGoerli --tags-require-all",
+    "deploy:optimisticSepolia": "hardhat deploy --network optimisticSepolia --tags optimisticSepolia --tags-require-all",
     "deploy:polygon": "hardhat deploy --network polygon --tags polygon --tags-require-all",
     "deploy:ethereum": "hardhat deploy --network ethereum --tags ethereum --tags-require-all",
     "deploy:avalanche": "hardhat deploy --network avalanche --tags avalanche --tags-require-all",
-    "deploy:base": "hardhat deploy --network base --tags base --tags-require-all"
+    "deploy:base": "hardhat deploy --network base --tags base --tags-require-all",
+    "deploy:optimisticEthereum": "hardhat deploy --network optimisticEthereum --tags optimisticEthereum --tags-require-all"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

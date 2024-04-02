@@ -28,11 +28,13 @@ const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
 const FUJI_RPC_URL = process.env.FUJI_RPC_URL;
 const BASE_SEPOLIA_RPC_URL = process.env.BASE_SEPOLIA_RPC_URL;
 const BASE_GOERLI_RPC_URL = process.env.BASE_GOERLI_RPC_URL;
+const OPTIMISM_SEPOLIA_RPC_URL = process.env.OPTIMISM_SEPOLIA_RPC_URL;
 
 const POLYGON_RPC_URL = process.env.POLYGON_RPC_URL;
 const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL;
 const AVALANCHE_RPC_URL = process.env.AVALANCHE_RPC_URL;
 const BASE_RPC_URL = process.env.BASE_RPC_URL;
+const OPTIMISM_RPC_URL = process.env.OPTIMISM_RPC_URL;
 
 const PRIVATE_KEYS = PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [];
 
@@ -66,6 +68,11 @@ const BASE_GOERLI_DEPLOYMENT_SETTINGS = {
     chainId: 84531,
 }
 
+const OPTIMISM_SEPOLIA_DEPLOYMENT_SETTINGS = {
+    url: OPTIMISM_SEPOLIA_RPC_URL,
+    accounts: PRIVATE_KEYS,
+    chainId: 11155420,
+}
 
 const POLYGON_DEPLOYMENT_SETTINGS = {
     url: POLYGON_RPC_URL,
@@ -91,10 +98,17 @@ const BASE_DEPLOYMENT_SETTINGS = {
     chainId: 8453,
 }
 
+const OPTIMISM_DEPLOYMENT_SETTINGS = {
+    url: OPTIMISM_RPC_URL,
+    accounts: PRIVATE_KEYS,
+    chainId: 10,
+}
+
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const AVALANCHE_API_KEY = process.env.AVALANCHE_API_KEY;
 const BASE_API_KEY = process.env.BASE_API_KEY;
+const OPTIMISM_API_KEY = process.env.OPTIMISM_API_KEY;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -124,10 +138,12 @@ module.exports = {
         fuji: FUJI_DEPLOYMENT_SETTINGS,
         baseSepolia: BASE_SEPOLIA_DEPLOYMENT_SETTINGS,
         baseGoerli: BASE_GOERLI_DEPLOYMENT_SETTINGS,
+        optimisticSepolia: OPTIMISM_SEPOLIA_DEPLOYMENT_SETTINGS,
         polygon: POLYGON_DEPLOYMENT_SETTINGS,
         ethereum: ETHEREUM_DEPLOYMENT_SETTINGS,
         avalanche: AVALANCHE_DEPLOYMENT_SETTINGS,
-        base: BASE_DEPLOYMENT_SETTINGS
+        base: BASE_DEPLOYMENT_SETTINGS,
+        optimisticEthereum: OPTIMISM_DEPLOYMENT_SETTINGS
     },
     defaultNetwork: "hardhat",
     etherscan: {
@@ -136,10 +152,13 @@ module.exports = {
             sepolia: ETHERSCAN_API_KEY,
             avalancheFujiTestnet: AVALANCHE_API_KEY,
             baseGoerli: BASE_API_KEY,
+            baseSepolia: BASE_API_KEY,
+            optimisticSepolia: OPTIMISM_API_KEY,
             mainnet: ETHERSCAN_API_KEY,
             polygon: POLYGONSCAN_API_KEY,
             avalanche: AVALANCHE_API_KEY,
-            base: BASE_API_KEY
+            base: BASE_API_KEY,
+            optimisticEthereum: OPTIMISM_API_KEY
         },
         customChains: [
             {
@@ -148,6 +167,14 @@ module.exports = {
                 urls: {
                   apiURL: "https://api-sepolia.basescan.org/api",
                   browserURL: "https://sepolia.basescan.org"
+                }
+            },
+            {
+                network: "optimisticSepolia",
+                chainId: 11155420,
+                urls: {
+                  apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
+                  browserURL: "https://sepolia-optimism.etherscan.io"
                 }
             }
         ]
@@ -179,7 +206,9 @@ module.exports = {
             43113: 0,
             8453: 0,
             84532: 0,
-            84531: 0
+            84531: 0,
+            10: 0,
+            11155420: 0
         },
         factoryDeployer: {
             31337: 1,
@@ -191,7 +220,9 @@ module.exports = {
             43113: 1,
             8453: 1,
             84532: 1,
-            84531: 1
+            84531: 1,
+            10: 1,
+            11155420: 1
         }
     },
     mocha: {

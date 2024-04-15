@@ -55,28 +55,28 @@
             "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
             "salt": 0,
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0x36af131A41ceFF0665fdED3118d0c644AE65b0cd"
         },
         "SparkIdentityTokenFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0xc645ea7D5Acd8107E4637Ee3A47bbf56796456AA"
         },
         "SparkRegistryFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0xf600B716d51CD98E2A8e869cA6613478c7035d7C"
         },
         "SparkIdentity": {
             "name": "SparkIdentity",
             "symbol": "SPID",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "baseUri": "https://backend.testnet.spark.arcadia.fun/v1/nft/identity/",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0xd5Fa5F94f29215592c4359Ac1BAd7237f226cC90"
         },
         "SparkRegistry": {
             "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "rewardTokenAddress": "0x781bB390a9DB51f4D0F5E7F41FDF7B678fE42cE2",
-            "contractAddress": "<deployed_contract_address>",
+            "contractAddress": "0xfdF2fAFB9e3100977045B5ad69960412cE012832",
             "isPaymentEnabled": false,
             "nativePaymentAmountInEther": "0.001",
             "paymentTokens": [
@@ -153,28 +153,28 @@
             "tokenboundAccountImplementation": "0x41C8f39463A868d3A88af00cd0fe7102F30E44eC",
             "salt": 0,
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0x2bB74Ad5228e6A9545562C25c65Fd1eD3068f13e"
         },
         "SparkIdentityTokenFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0xc645ea7D5Acd8107E4637Ee3A47bbf56796456AA"
         },
         "SparkRegistryFactory": {
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0xf600B716d51CD98E2A8e869cA6613478c7035d7C"
         },
         "SparkIdentity": {
             "name": "SparkIdentity",
             "symbol": "SPID",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "baseUri": "https://backend.testnet.spark.arcadia.fun/v1/nft/identity/",
-            "contractAddress": "<deployed_contract_address>"
+            "contractAddress": "0xd5Fa5F94f29215592c4359Ac1BAd7237f226cC90"
         },
         "SparkRegistry": {
             "beneficiaryAddress": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "owner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
             "rewardTokenAddress": "0xE6Ae73403e10a34c1ff98e49cc51e702E60058A5",
-            "contractAddress": "<deployed_contract_address>",
+            "contractAddress": "0xfdF2fAFB9e3100977045B5ad69960412cE012832",
             "isPaymentEnabled": false,
             "nativePaymentAmountInEther": "0.001",
             "paymentTokens": [

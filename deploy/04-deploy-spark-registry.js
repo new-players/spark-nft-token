@@ -13,18 +13,26 @@ module.exports = async ({ deployments }) => {
 
     const { log } = deployments;
 
-    const SparkRegistryFactory = await ethers
-        .getContractAt("SparkRegistryFactory", SparkRegistryFactoryInfo.contractAddress, deployer);
+    const SparkRegistryFactory = await ethers.getContractAt(
+        "SparkRegistryFactory",
+        SparkRegistryFactoryInfo.contractAddress,
+        deployer
+    );
 
     const encoder = ethers.AbiCoder.defaultAbiCoder();
 
-    const args = [SparkIdentityInfo.contractAddress, SparkRegistryInfo.rewardTokenAddress, SparkRegistryInfo.beneficiaryAddress, SparkRegistryInfo.owner];
+    const args = [
+        SparkIdentityInfo.contractAddress,
+        SparkRegistryInfo.rewardTokenAddress,
+        SparkRegistryInfo.beneficiaryAddress,
+        SparkRegistryInfo.owner,
+    ];
 
-    const { bytecode } = await artifacts.readArtifact('SparkRegistry');
+    const { bytecode } = await artifacts.readArtifact("SparkRegistry");
     // this is equivalent to abi.encode(args); in solidity
-    const encodedArgs = encoder.encode(['address', 'address', 'address', 'address'], args);
+    const encodedArgs = encoder.encode(["address", "address", "address", "address"], args);
     // Combine bytecode and encoded constructor arguments for deployment
-    const deployableBytecode = ethers.solidityPacked(['bytes', 'bytes'], [bytecode, encodedArgs]);
+    const deployableBytecode = ethers.solidityPacked(["bytes", "bytes"], [bytecode, encodedArgs]);
 
     // Generate a unique salt for deterministic deployment
     // this is equivalent to abi.encode(args); in solidity
@@ -35,15 +43,21 @@ module.exports = async ({ deployments }) => {
     // this is equivalent to keccak256(abi.encode(args)); in solidity
     const deployableSalt = ethers.solidityPackedKeccak256(["bytes"], [salt]);
 
-    // derive the computed address. Address computation is based on the 
+    // derive the computed address. Address computation is based on the
     // Temprory Proxy - bytecode, salt, deployer address and 0xff (prefix byte to prevent a collision with create opcode)
     // Implementation contract is attached to the proxy
     // Hence create3 is only dependent on the salt and deployer address
     const computedAddress = await SparkRegistryFactory.computeAddress(deployableSalt);
-    console.log(`Deterministic computed address of SparkRegistry (${network.name}) is: ${computedAddress}`);
+    console.log(
+        `Deterministic computed address of SparkRegistry (${network.name}) is: ${computedAddress}`
+    );
 
-     // Deploy the contract deterministically with the computed salt and bytecode
-    const tx = await SparkRegistryFactory.determinsiticDeploy(0, deployableSalt, deployableBytecode);
+    // Deploy the contract deterministically with the computed salt and bytecode
+    const tx = await SparkRegistryFactory.determinsiticDeploy(
+        0,
+        deployableSalt,
+        deployableBytecode
+    );
 
     const waitConfirmation = network.config.chainId === 31337 ? 0 : 15;
 
@@ -58,7 +72,7 @@ module.exports = async ({ deployments }) => {
         [network.name]: {
             ...existingConfig[network.name],
             SparkRegistry: {
-                ...existingConfig[network.name]['SparkRegistry'],
+                ...existingConfig[network.name]["SparkRegistry"],
                 contractAddress: computedAddress,
             },
         },
@@ -73,6 +87,21 @@ module.exports = async ({ deployments }) => {
             constructorArguments: args,
         });
     }
-}
+};
 
-module.exports.tags = ["SparkRegistry", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "optimisticSepolia", "polygon", "ethereum", "avalanche", "base", "optimisticEthereum"];
+module.exports.tags = [
+    "SparkRegistry",
+    "all",
+    "local",
+    "goerli",
+    "sepolia",
+    "fuji",
+    "baseSepolia",
+    "baseGoerli",
+    "optimisticSepolia",
+    "polygon",
+    "ethereum",
+    "avalanche",
+    "base",
+    "optimisticEthereum",
+];

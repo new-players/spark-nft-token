@@ -17,7 +17,7 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
         args,
         automine: true,
         log: true,
-        waitConfirmations: network.config.chainId === 31337 ? 0 : 6
+        waitConfirmations: network.config.chainId === 31337 ? 0 : 6,
     });
 
     log(`SparkRegistryFactory (${network.name}) deployed to ${SparkRegistryFactory.address}`);
@@ -27,7 +27,7 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
         [network.name]: {
             ...existingConfig[network.name],
             SparkRegistryFactory: {
-                ...existingConfig[network.name]['SparkRegistryFactory'],
+                ...existingConfig[network.name]["SparkRegistryFactory"],
                 contractAddress: SparkRegistryFactory.address,
             },
         },
@@ -42,6 +42,21 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
             constructorArguments: args,
         });
     }
-}
+};
 
-module.exports.tags = ["SparkRegistryFactory", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "optimisticSepolia", "polygon", "ethereum", "avalanche", "base", "optimisticEthereum"];
+module.exports.tags = [
+    "SparkRegistryFactory",
+    "all",
+    "local",
+    "goerli",
+    "sepolia",
+    "fuji",
+    "baseSepolia",
+    "baseGoerli",
+    "optimisticSepolia",
+    "polygon",
+    "ethereum",
+    "avalanche",
+    "base",
+    "optimisticEthereum",
+];

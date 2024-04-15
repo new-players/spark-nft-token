@@ -12,17 +12,21 @@ module.exports = async ({ deployments }) => {
 
     const { log } = deployments;
 
-    const SparkIdentityTokenFactory = await ethers.getContractAt("SparkIdentityTokenFactory", contractAddress, deployer);
+    const SparkIdentityTokenFactory = await ethers.getContractAt(
+        "SparkIdentityTokenFactory",
+        contractAddress,
+        deployer
+    );
 
     const encoder = ethers.AbiCoder.defaultAbiCoder();
 
     const args = [name, symbol, owner];
 
-    const { bytecode } = await artifacts.readArtifact('SparkIdentity');
+    const { bytecode } = await artifacts.readArtifact("SparkIdentity");
     // this is equivalent to abi.encode(args); in solidity
-    const encodedArgs = encoder.encode(['string', 'string', 'address'], args);
+    const encodedArgs = encoder.encode(["string", "string", "address"], args);
     // Combine the bytecode and encoded arguments for deployment
-    const deployableBytecode = ethers.solidityPacked(['bytes', 'bytes'], [bytecode, encodedArgs]);
+    const deployableBytecode = ethers.solidityPacked(["bytes", "bytes"], [bytecode, encodedArgs]);
 
     // Generate a unique salt based on deployer's address and a nonce
     // this is equivalent to abi.encode(args); in solidity
@@ -34,16 +38,22 @@ module.exports = async ({ deployments }) => {
     const deployableSalt = ethers.solidityPackedKeccak256(["bytes"], [salt]);
 
     // Compute the address where the contract will be deployed
-    // derive the computed address. Address computation is based on the 
+    // derive the computed address. Address computation is based on the
     // Temprory Proxy - bytecode, salt, deployer address and 0xff (prefix byte to prevent a collision with create opcode)
     // Implementation contract is attached to the proxy
     // Hence create3 is only dependent on the salt and deployer address
     const computedAddress = await SparkIdentityTokenFactory.computeAddress(deployableSalt);
-    console.log(`Deterministic computed address of SparkIdentity token (${network.name}) is: ${computedAddress}`);
+    console.log(
+        `Deterministic computed address of SparkIdentity token (${network.name}) is: ${computedAddress}`
+    );
 
     // Deploy the contract deterministically with the computed salt and bytecode
-    const tx = await SparkIdentityTokenFactory.determinsiticDeploy(0, deployableSalt, deployableBytecode);
-    
+    const tx = await SparkIdentityTokenFactory.determinsiticDeploy(
+        0,
+        deployableSalt,
+        deployableBytecode
+    );
+
     const waitConfirmation = network.config.chainId === 31337 ? 0 : 15;
 
     // Wait for 15 block confirmation to prevent contract verification failure
@@ -57,7 +67,7 @@ module.exports = async ({ deployments }) => {
         [network.name]: {
             ...existingConfig[network.name],
             SparkIdentity: {
-                ...existingConfig[network.name]['SparkIdentity'],
+                ...existingConfig[network.name]["SparkIdentity"],
                 contractAddress: computedAddress,
             },
         },
@@ -72,6 +82,21 @@ module.exports = async ({ deployments }) => {
             constructorArguments: args,
         });
     }
-}
+};
 
-module.exports.tags = ["SparkIdentity", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "optimisticSepolia", "polygon", "ethereum", "avalanche", "base", "optimisticEthereum"];
+module.exports.tags = [
+    "SparkIdentity",
+    "all",
+    "local",
+    "goerli",
+    "sepolia",
+    "fuji",
+    "baseSepolia",
+    "baseGoerli",
+    "optimisticSepolia",
+    "polygon",
+    "ethereum",
+    "avalanche",
+    "base",
+    "optimisticEthereum",
+];

@@ -17,17 +17,19 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
         args,
         automine: true,
         log: true,
-        waitConfirmations: network.config.chainId === 31337 ? 0 : 6
+        waitConfirmations: network.config.chainId === 31337 ? 0 : 6,
     });
 
-    log(`SparkIdentityTokenFactory (${network.name}) deployed to ${SparkIdentityTokenFactory.address}`);
+    log(
+        `SparkIdentityTokenFactory (${network.name}) deployed to ${SparkIdentityTokenFactory.address}`
+    );
 
     const config = {
         ...existingConfig,
         [network.name]: {
             ...existingConfig[network.name],
             SparkIdentityTokenFactory: {
-                ...existingConfig[network.name]['SparkIdentityTokenFactory'],
+                ...existingConfig[network.name]["SparkIdentityTokenFactory"],
                 contractAddress: SparkIdentityTokenFactory.address,
             },
         },
@@ -42,6 +44,21 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
             constructorArguments: args,
         });
     }
-}
+};
 
-module.exports.tags = ["SparkIdentityTokenFactory", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "optimisticSepolia", "polygon", "ethereum", "avalanche", "base", "optimisticEthereum"];
+module.exports.tags = [
+    "SparkIdentityTokenFactory",
+    "all",
+    "local",
+    "goerli",
+    "sepolia",
+    "fuji",
+    "baseSepolia",
+    "baseGoerli",
+    "optimisticSepolia",
+    "polygon",
+    "ethereum",
+    "avalanche",
+    "base",
+    "optimisticEthereum",
+];

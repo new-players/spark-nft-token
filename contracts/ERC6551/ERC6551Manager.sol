@@ -33,10 +33,7 @@ contract ERC6551Manager is AccessControlEnumerable {
     );
 
     /// @notice Event emitted when the ERC6551 proxy is updated
-    event ERC6551ProxyUpdated(
-        address oldProxyAddress,
-        address newProxyAddress
-    );
+    event ERC6551ProxyUpdated(address oldProxyAddress, address newProxyAddress);
 
     /// @notice Event emitted when the ERC6551 implementation is updated
     event ERC6551ImplementationUpdated(
@@ -46,7 +43,6 @@ contract ERC6551Manager is AccessControlEnumerable {
 
     /// @notice Event emitted when the ERC6551 salt is updated
     event ERC6551SaltUpdated(bytes32 oldSalt, bytes32 newSalt);
-
 
     /// @notice Constructor for the ERC6551Manager contract
     /// @param _registryAddress The address of the ERC6551 registry
@@ -98,10 +94,7 @@ contract ERC6551Manager is AccessControlEnumerable {
         address oldProxyAddress = erc6551ProxyAddress;
         erc6551ProxyAddress = _proxyAddress;
 
-        emit ERC6551ProxyUpdated(
-            oldProxyAddress,
-            _proxyAddress
-        );
+        emit ERC6551ProxyUpdated(oldProxyAddress, _proxyAddress);
     }
 
     /// @notice Configure the ERC 6551 implementation contract address for TBA
@@ -122,7 +115,9 @@ contract ERC6551Manager is AccessControlEnumerable {
 
     /// @notice Configure the salt for the creation and lookup of token bound account
     /// @param _salt ERC 6551 salt value (zero is officially used)
-    function setupERC6551Salt(bytes32 _salt) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    function setupERC6551Salt(
+        bytes32 _salt
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         Validator.checkForZeroBytes32(_salt);
 
         bytes32 oldSalt = erc6551Salt;
@@ -169,6 +164,8 @@ contract ERC6551Manager is AccessControlEnumerable {
             INTERFACE_ID_ERC721
         );
 
+        // Create account will automatically checks whether the account is already deployed or not.
+        // If the contract is not already deployed, it will deploy the account or else it will will just the account
         tokenBoundAccountAddress = IERC6551Registry(erc6551RegistryAddress)
             .createAccount(
                 erc6551ProxyAddress,
@@ -178,7 +175,15 @@ contract ERC6551Manager is AccessControlEnumerable {
                 _tokenId
             );
 
-        IERC6551Proxy(payable(tokenBoundAccountAddress)).initialize(erc6551ImplementationAddress);
+        // If the token bound account proxy is already initialized during the account deployement ?
+        // It will revert the transaction with AlreadyInitialized() error. There is no public method to 
+        // check if the initialization is already done or not, hence initialization is attempted and skip the revert
+        // if already initialized.
+        try
+            IERC6551Proxy(payable(tokenBoundAccountAddress)).initialize(
+                erc6551ImplementationAddress
+            )
+        {} catch {}
     }
 
     /// @notice Retrieve the chain id of the network where the contract is deployed

@@ -10,8 +10,8 @@ const COMPILER_SETTINGS = {
     optimizer: {
         enabled: true,
         runs: 200,
-    }
-}
+    },
+};
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const FACTORY_DEPLOYER_PRIVATE_KEY = process.env.FACTORY_DEPLOYER_PRIVATE_KEY;
@@ -36,73 +36,74 @@ const AVALANCHE_RPC_URL = process.env.AVALANCHE_RPC_URL;
 const BASE_RPC_URL = process.env.BASE_RPC_URL;
 const OPTIMISM_RPC_URL = process.env.OPTIMISM_RPC_URL;
 
-const PRIVATE_KEYS = PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [];
+const PRIVATE_KEYS =
+    PRIVATE_KEY && FACTORY_DEPLOYER_PRIVATE_KEY ? [PRIVATE_KEY, FACTORY_DEPLOYER_PRIVATE_KEY] : [];
 
 const GOERLI_DEPLOYMENT_SETTINGS = {
     url: GOERLI_RPC_URL,
     accounts: PRIVATE_KEYS,
-    chainId: 5
+    chainId: 5,
 };
 
 const SEPOLIA_DEPLOYMENT_SETTINGS = {
     url: SEPOLIA_RPC_URL,
     accounts: PRIVATE_KEYS,
     chainId: 11155111,
-}
+};
 
 const FUJI_DEPLOYMENT_SETTINGS = {
     url: FUJI_RPC_URL,
     accounts: PRIVATE_KEYS,
-    chainId: 43113
+    chainId: 43113,
 };
 
 const BASE_SEPOLIA_DEPLOYMENT_SETTINGS = {
     url: BASE_SEPOLIA_RPC_URL,
     accounts: PRIVATE_KEYS,
     chainId: 84532,
-}
+};
 
 const BASE_GOERLI_DEPLOYMENT_SETTINGS = {
     url: BASE_GOERLI_RPC_URL,
     accounts: PRIVATE_KEYS,
     chainId: 84531,
-}
+};
 
 const OPTIMISM_SEPOLIA_DEPLOYMENT_SETTINGS = {
     url: OPTIMISM_SEPOLIA_RPC_URL,
     accounts: PRIVATE_KEYS,
     chainId: 11155420,
-}
+};
 
 const POLYGON_DEPLOYMENT_SETTINGS = {
     url: POLYGON_RPC_URL,
     accounts: PRIVATE_KEYS,
-    chainId: 137
+    chainId: 137,
 };
 
 const ETHEREUM_DEPLOYMENT_SETTINGS = {
     url: ETHEREUM_RPC_URL,
     accounts: PRIVATE_KEYS,
-    chainId: 1
+    chainId: 1,
 };
 
 const AVALANCHE_DEPLOYMENT_SETTINGS = {
     url: AVALANCHE_RPC_URL,
     accounts: PRIVATE_KEYS,
-    chainId: 43114
+    chainId: 43114,
 };
 
 const BASE_DEPLOYMENT_SETTINGS = {
     url: BASE_RPC_URL,
     accounts: PRIVATE_KEYS,
     chainId: 8453,
-}
+};
 
 const OPTIMISM_DEPLOYMENT_SETTINGS = {
     url: OPTIMISM_RPC_URL,
     accounts: PRIVATE_KEYS,
     chainId: 10,
-}
+};
 
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
@@ -143,7 +144,7 @@ module.exports = {
         ethereum: ETHEREUM_DEPLOYMENT_SETTINGS,
         avalanche: AVALANCHE_DEPLOYMENT_SETTINGS,
         base: BASE_DEPLOYMENT_SETTINGS,
-        optimisticEthereum: OPTIMISM_DEPLOYMENT_SETTINGS
+        optimisticEthereum: OPTIMISM_DEPLOYMENT_SETTINGS,
     },
     defaultNetwork: "hardhat",
     etherscan: {
@@ -158,26 +159,26 @@ module.exports = {
             polygon: POLYGONSCAN_API_KEY,
             avalanche: AVALANCHE_API_KEY,
             base: BASE_API_KEY,
-            optimisticEthereum: OPTIMISM_API_KEY
+            optimisticEthereum: OPTIMISM_API_KEY,
         },
         customChains: [
             {
                 network: "baseSepolia",
                 chainId: 84532,
                 urls: {
-                  apiURL: "https://api-sepolia.basescan.org/api",
-                  browserURL: "https://sepolia.basescan.org"
-                }
+                    apiURL: "https://api-sepolia.basescan.org/api",
+                    browserURL: "https://sepolia.basescan.org",
+                },
             },
             {
                 network: "optimisticSepolia",
                 chainId: 11155420,
                 urls: {
-                  apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
-                  browserURL: "https://sepolia-optimism.etherscan.io"
-                }
-            }
-        ]
+                    apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
+                    browserURL: "https://sepolia-optimism.etherscan.io",
+                },
+            },
+        ],
     },
     gasReporter: {
         enabled: REPORT_GAS,
@@ -208,7 +209,7 @@ module.exports = {
             84532: 0,
             84531: 0,
             10: 0,
-            11155420: 0
+            11155420: 0,
         },
         factoryDeployer: {
             31337: 1,
@@ -222,8 +223,8 @@ module.exports = {
             84532: 1,
             84531: 1,
             10: 1,
-            11155420: 1
-        }
+            11155420: 1,
+        },
     },
     mocha: {
         timeout: 300000, // 300 seconds max for running tests

@@ -4,7 +4,8 @@ const fs = require("fs").promises;
 module.exports = async ({ deployments, getNamedAccounts }) => {
     const existingConfig = JSON.parse(await fs.readFile("config/deployment-config.json", "utf8"));
 
-    const { registry, tokenboundAccountProxy, tokenboundAccountImplementation, salt, owner } = existingConfig[network.name].ERC6551Manager;
+    const { registry, tokenboundAccountProxy, tokenboundAccountImplementation, salt, owner } =
+        existingConfig[network.name].ERC6551Manager;
 
     const { deploy, log } = deployments;
 
@@ -14,14 +15,20 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
 
     const deployableSalt = encoder.encode(["uint256"], [salt]);
 
-    const args = [registry, tokenboundAccountProxy, tokenboundAccountImplementation, deployableSalt, owner];
+    const args = [
+        registry,
+        tokenboundAccountProxy,
+        tokenboundAccountImplementation,
+        deployableSalt,
+        owner,
+    ];
 
     const ERC6551Manager = await deploy("ERC6551Manager", {
         from: deployer,
         args,
         automine: true,
         log: true,
-        waitConfirmations: network.config.chainId === 31337 ? 0 : 6
+        waitConfirmations: network.config.chainId === 31337 ? 0 : 6,
     });
 
     log(`ERC6551Manager (${network.name}) deployed to ${ERC6551Manager.address}`);
@@ -31,7 +38,7 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
         [network.name]: {
             ...existingConfig[network.name],
             ERC6551Manager: {
-                ...existingConfig[network.name]['ERC6551Manager'],
+                ...existingConfig[network.name]["ERC6551Manager"],
                 contractAddress: ERC6551Manager.address,
             },
         },
@@ -46,6 +53,21 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
             constructorArguments: args,
         });
     }
-}
+};
 
-module.exports.tags = ["ERC6551Manager", "all", "local", "goerli", "sepolia", "fuji", "baseSepolia", "baseGoerli", "optimisticSepolia", "polygon", "ethereum", "avalanche", "base", "optimisticEthereum"];
+module.exports.tags = [
+    "ERC6551Manager",
+    "all",
+    "local",
+    "goerli",
+    "sepolia",
+    "fuji",
+    "baseSepolia",
+    "baseGoerli",
+    "optimisticSepolia",
+    "polygon",
+    "ethereum",
+    "avalanche",
+    "base",
+    "optimisticEthereum",
+];
